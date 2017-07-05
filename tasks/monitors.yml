@@ -12,6 +12,7 @@
   copy:
     src: "{{ item }}"
     dest: "{{ monit_scripts_folder }}"
+    mode: 0755
   with_fileglob:
     - programs/
 
