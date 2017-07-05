@@ -8,6 +8,13 @@
   with_items: monit_services
   notify: restart monit
 
+- name: monitors - Copy program
+  copy:
+    src: "{{ item }}"
+    dest: "{{ monit_scripts_folder }}"
+  with_fileglob:
+    - programs/
+
 - name: monitors - Create facts directory
   file:
     path: "/etc/ansible/facts.d"

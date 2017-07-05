@@ -10,7 +10,10 @@
 
 - name: create lib folder
   file: path="{{ monit_lib_folder }}" state=directory mode=0600
-  
+
+- name: create scripts folder
+  file: path="{{ monit_scripts_folder }}" state=directory mode=0700
+
 - name: config - Setup monitrc
   template:
     src: monitrc.j2
