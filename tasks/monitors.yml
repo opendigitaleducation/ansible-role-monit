@@ -1,4 +1,10 @@
 ---
+- include_vars: debian.yml
+  when:  ansible_os_family == "Debian"
+
+- include_vars: redhat.yml
+  when: ansible_os_family == "RedHat"
+
 - name: monitors - Write monitors
   template:
     src: monitor.j2
@@ -10,11 +16,11 @@
 
 - name: monitors - Copy program
   copy:
-    src: "{{ item }}"
+    src: "files/{{ item }}"
     dest: "{{ monit_scripts_folder }}"
     mode: 0755
-  with_fileglob:
-    - programs/
+  with_items: monit_services_program_name
+  when: monit_services_program_name is defined
 
 - name: monitors - Create facts directory
   file:
