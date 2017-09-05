@@ -1,9 +1,5 @@
-- hosts: host1
-  sudo: yes
+- name: Configuring monitoring on all instances
+  hosts: all
+  remote_user: root
   roles:
-    - { role: monit, monit_services: [ unbound ], monit_webinterface_enabled: false }
-
-- hosts: host2
-  sudo: yes
-  roles:
-    - { role: monit, monit_services: [ sshd ], monit_webinterface_port: 8080 }
+    - ansible-role-monit
