@@ -1,1 +1,4 @@
 .vagrant/
+inventory/
+example.yml
+vagrant.yml
