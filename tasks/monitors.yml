@@ -13,6 +13,7 @@
     group: root
   with_items: monit_services
   notify: restart monit
+  tags: monit_monitors_item
 
 - name: monitors - Copy program
   copy:
