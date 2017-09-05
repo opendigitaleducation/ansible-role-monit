@@ -14,14 +14,16 @@ check process {{ monit_monitor.name }}
   {%- if monit_monitor.group is defined %} and gid {{monit_monitor.group}}{% endif %}
   {%- if monit_monitor.timeout is defined %} with timeout {{monit_monitor.timeout}} seconds{% endif %}
 {% endif %}
+
 {% if monit_monitor.stop is defined %}
   stop program = "{{ monit_monitor.stop }}"
   {%- if monit_monitor.user is defined %} as uid {{monit_monitor.user}}{% endif %}
   {%- if monit_monitor.group is defined %} and gid {{monit_monitor.group}}{% endif %}
   {%- if monit_monitor.timeout is defined %} with timeout {{monit_monitor.timeout}} seconds{% endif %}
 {% endif %}
+
 {% if monit_monitor.restart is defined %}
-  stop program = "{{ monit_monitor.restart }}"
+  restart program = "{{ monit_monitor.restart }}"
   {%- if monit_monitor.user is defined %} as uid {{monit_monitor.user}}{% endif %}
   {%- if monit_monitor.group is defined %} and gid {{monit_monitor.group}}{% endif %}
   {%- if monit_monitor.timeout is defined %} with timeout {{monit_monitor.timeout}} seconds{% endif %}
@@ -36,6 +38,7 @@ check filesystem {{ monit_monitor.name }} with path {{ monit_monitor.target }}
 check program {{ monit_monitor.name }} with path {{ monit_monitor.target }}
 {%- if monit_monitor.timeout is defined %} with timeout {{monit_monitor.timeout}} seconds{% endif %}
 {% endif %}
+
 {% if monit_monitor.rules is defined %}
 {% for rule in monit_monitor.rules %}
   {{ rule }}
