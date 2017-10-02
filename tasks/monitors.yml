@@ -1,9 +1,11 @@
 ---
 - include_vars: debian.yml
   when:  ansible_os_family == "Debian"
+  tags: monit_monitors_item
 
 - include_vars: redhat.yml
   when: ansible_os_family == "RedHat"
+  tags: monit_monitors_item
 
 - name: monitors - Write monitors
   template:
