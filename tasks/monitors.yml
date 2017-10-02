@@ -1,9 +1,11 @@
 ---
 - include_vars: debian.yml
   when:  ansible_os_family == "Debian"
+  tags: monit_monitors_item
 
 - include_vars: redhat.yml
   when: ansible_os_family == "RedHat"
+  tags: monit_monitors_item
 
 - name: monitors - Write monitors
   template:
@@ -18,7 +20,7 @@
 - name: monitors - Copy program
   copy:
     src: "files/{{ item }}"
-    dest: "{{ monit_scripts_folder }}"
+    dest: "{{ monit_scripts_folder }}/"
     mode: 0755
   with_items: monit_services_program_name
   when: monit_services_program_name is defined
